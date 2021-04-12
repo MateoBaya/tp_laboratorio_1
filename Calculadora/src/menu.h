@@ -1,7 +1,7 @@
 #ifndef MENU_H_
 #define MENU_H_
 
-int menu(int valor1, int valor2, int* valResultado, float* valResultadoFloat, int opcionUsuario);
+int menu(int valor1, int valor2, int* valResultado,int* val2Resultado, float* valResultadoFloat, int opcionUsuario);
 /* @brief Menu que revisa el valor elegido por el usuario, que significara en un switch de funciones matematicas
  * @param valor1 Toma el primer valor dado por el usuario en main
  * @param valor2 Toma el segundo valor dado por el usuario en main

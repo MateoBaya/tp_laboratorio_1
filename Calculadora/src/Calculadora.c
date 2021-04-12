@@ -10,8 +10,16 @@ int main() {
 	int x;
 	int y;
 	int resultado;
+	int segundoResultado;
 	int opcionUsuario;
 	float resultadoFloat;
+
+	printf("Escriba un número entero x: ");
+	fflush(stdin);
+	scanf("%d",&x);
+	printf("Escriba un número entero y: ");
+	fflush(stdin);
+	scanf("%d",&y);
 
 	do
 	{
@@ -19,34 +27,19 @@ int main() {
 	scanf("%d",&opcionUsuario);
 	}while(opcionUsuario > 5 || opcionUsuario < 1);
 
-	printf("Escriba un número entero x: ");
-	fflush(stdin);
-	scanf("%d",&x);
-	if(opcionUsuario != 5)
-	{
-	printf("Escriba un número entero y: ");
-	fflush(stdin);
-	scanf("%d",&y);
-	}
 
-	retorno = menu(x,y,&resultado,&resultadoFloat,opcionUsuario);
+	retorno = menu(x,y,&resultado,&segundoResultado,&resultadoFloat,opcionUsuario);
 
 	if(retorno == 1)
 	{
 		printf("x es igual a: %d\n",x);
-		if(opcionUsuario != 5)
-		{
 		printf("y es igual a: %d\n",y);
-		}
 		printf("El resultado es: %d\n",resultado);
 
 	}else if(retorno == 2)
 	{
 		printf("x es igual a: %d\n",x);
-		if(opcionUsuario != 5)
-		{
 		printf("y es igual a: %d\n",y);
-		}
 		printf("El resultado es: %f\n",resultadoFloat);
 	}else
 	{
@@ -64,8 +57,28 @@ int main() {
 			printf("La repuesta es 0 o incoherente, alguno de tus valores era 0");
 			break;
 		case 5:
-			printf("ERROR. Tu numero era menor a 0");
-			break;
+			switch(retorno)
+			{
+			case 7:
+				printf("Ambos valores son negativos, no hay resultado");
+				break;
+			case 9:
+				printf("x es igual a: %d\n",x);
+				printf("ERROR. El segundo valor era negativo.\n");
+				printf("El resultado del primer valor es: %d\n",resultado);
+				break;
+			case 11:
+				printf("ERROR. El primer valor era negativo.\n");
+				printf("y es igual a: %d\n",y);
+				printf("El resultado del segundo valor es: %d\n",segundoResultado);
+				break;
+			case 13:
+				printf("x es igual a: %d\n",x);
+				printf("y es igual a: %d\n",y);
+				printf("El resultado del primer valor es: %d\n",resultado);
+				printf("El resultado del segundo valor es: %d\n",segundoResultado);
+				break;
+			}
 		}
 	}
 

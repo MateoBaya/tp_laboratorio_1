@@ -33,10 +33,12 @@ int dividir(int valor1, int valor2, float* valResultado);
  * @return Es utilizado para mostrarle al usuario que no se ha hecho la división
  */
 
-int factorial(int valor1, int* valResultado);
+int factorial(int valor1,int valor2, int* valResultado, int* val2Resultado);
 /* @brief Muestra el resultado del factorial de un valor
  * @param valor1 Primer valor ingresado
+ * @param valor2 Segundo valor ingresado
  * @param valresultado es el puntero que contiene el resultado
+ * @param val2Resultado es el puntero que contiene el segundo resultado
  * @return Es utilizado para mostrarle al usuario que no se ha hecho el factorial
  */
 

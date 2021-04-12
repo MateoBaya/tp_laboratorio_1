@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "funciones.h"
 
-int menu(int valor1, int valor2, int* valResultado, float* valResultadoFloat, int opcionUsuario)
+int menu(int valor1, int valor2, int* valResultado,int* val2Resultado, float* valResultadoFloat, int opcionUsuario)
 {
 	int funcionar;
 	switch(opcionUsuario)
@@ -43,12 +43,21 @@ int menu(int valor1, int valor2, int* valResultado, float* valResultadoFloat, in
 		}
 		break;
 	case 5:
-		if(factorial(valor1, &*valResultado))
+		funcionar = factorial(valor1,valor2,&*valResultado,&*val2Resultado);
+		switch(funcionar)
 		{
-			funcionar = factorial(valor1, &*valResultado);
-		}else
-		{
-			funcionar = 0;
+		case 7:
+			printf("Ambos valores son negativos, no hay resultado");
+			break;
+		case 9:
+			printf("ERROR. El segundo valor era negativo.\n");
+			break;
+		case 11:
+			printf("ERROR. El primer valor era negativo.\n");
+			break;
+		case 12:
+			printf("Ambos valores positivos");
+			break;
 		}
 		break;
 	}
