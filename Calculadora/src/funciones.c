@@ -1,5 +1,5 @@
-#include "validaciones.h"
 #include <stdio.h>
+#include "utn.h"
 
 int suma(int valor1, int valor2, int* valResultado)
 {

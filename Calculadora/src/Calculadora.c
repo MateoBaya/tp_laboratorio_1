@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "funciones.h"
-#include "validaciones.h"
 #include "menu.h"
+#include "utn.h"
 
 int main() {
 	setbuf(stdout,NULL);

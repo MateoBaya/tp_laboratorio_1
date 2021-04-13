@@ -1,5 +1,5 @@
-#ifndef VALIDACIONES_H_
-#define VALIDACIONES_H_
+#ifndef UTN_H_
+#define UTN_H_
 
 int nadaIgual0(int valor1, int valor2);
 /* @brief Confirma si valor1 y valor 2 son distintos de 0
@@ -31,4 +31,4 @@ int numeroNeg(int val1);
  * @param val1 valor obtenido de main
  * @return El valor de return es 0 si no paso por la funcion
  */
-#endif /* VALIDACIONES_H_ */
+#endif /* UTN_H_ */
