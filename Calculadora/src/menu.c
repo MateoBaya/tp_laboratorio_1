@@ -21,22 +21,22 @@ int menuUsuario()
 	{
 		if(flagx && flagy)
 		{
-		printf("1- Ingrese valor x\n2- Ingrese valor y\n3-Eliga su operacion\n4-Ver resultados\n5-Salir\n");
+		printf("1- Ingrese valor entero x\n2- Ingrese valor entero y\n3-Eliga su operacion\n4-Ver resultados\n5-Salir\n");
 		printf("Elegir:");
 		scanf("%d",&opcionInicialUsuario);
 		}else if(flagx == 0 && flagy)
 		{
-			printf("\n1- Ingrese valor x: %d\n2- Ingrese valor y\n3-Eliga su operacion\n4-Ver resultados\n5-Salir\n",x);
+			printf("\n1- Ingrese valor entero x: %d\n2- Ingrese valor entero y\n3-Eliga su operacion\n4-Ver resultados\n5-Salir\n",x);
 			printf("Elegir:");
 			scanf("%d",&opcionInicialUsuario);
 		}else if(flagy == 0 && flagx)
 		{
-			printf("\n1- Ingrese valor x\n2- Ingrese valor y: %d\n3-Eliga su operacion\n4-Ver resultados\n5-Salir\n",y);
+			printf("\n1- Ingrese valor entero x\n2- Ingrese valor entero y: %d\n3-Eliga su operacion\n4-Ver resultados\n5-Salir\n",y);
 			printf("Elegir:");
 			scanf("%d",&opcionInicialUsuario);
 		}else if(flagx == 0 && flagy == 0)
 		{
-			printf("\n1- Ingrese valor x: %d\n2- Ingrese valor y: %d\n3-Eliga su operacion\n4-Ver resultados\n5-Salir\n",x,y);
+			printf("\n1- Ingrese valor entero x: %d\n2- Ingrese valor entero y: %d\n3-Eliga su operacion\n4-Ver resultados\n5-Salir\n",x,y);
 			printf("Elegir:");
 			scanf("%d",&opcionInicialUsuario);
 		}
@@ -180,21 +180,6 @@ int submenu(int valor1, int valor2, int* valResultado,int* val2Resultado, float*
 		break;
 	case 5:
 		funcionar = factorial(valor1,valor2,&*valResultado,&*val2Resultado);
-		switch(funcionar)
-		{
-		case 7:
-			printf("Ambos valores son negativos, no hay resultado");
-			break;
-		case 9:
-			printf("ERROR. El segundo valor era negativo.\n");
-			break;
-		case 11:
-			printf("ERROR. El primer valor era negativo.\n");
-			break;
-		case 12:
-			printf("Ambos valores positivos");
-			break;
-		}
 		break;
 	}
 	return funcionar;
