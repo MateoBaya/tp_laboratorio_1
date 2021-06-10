@@ -435,8 +435,9 @@ int ordenarPorApellidoSector(eTrabajadores varGeneral[],int len)
 						auxFloat=varGeneral[i].salario;
 						varGeneral[i].salario=varGeneral[i-1].salario;
 						varGeneral[i-1].salario=auxFloat;
+						flagNoOrdenado=1;
 
-					}else if((varGeneral[i].sector == varGeneral[i-1].sector) && strcmp(varGeneral[i].apellido,varGeneral[i-1].apellido) < 0)
+					}else if(varGeneral[i].sector == varGeneral[i-1].sector && strcmp(varGeneral[i].apellido,varGeneral[i-1].apellido) < 0)
 					{
 						aux=varGeneral[i].idTrabajador;
 						varGeneral[i].idTrabajador=varGeneral[i-1].idTrabajador;
@@ -453,8 +454,10 @@ int ordenarPorApellidoSector(eTrabajadores varGeneral[],int len)
 						auxFloat=varGeneral[i].salario;
 						varGeneral[i].salario=varGeneral[i-1].salario;
 						varGeneral[i-1].salario=auxFloat;
+						flagNoOrdenado=1;
 
 					}
+
 			}
 		funcionar=1;
 		}
