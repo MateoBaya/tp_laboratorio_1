@@ -29,7 +29,7 @@ int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
 			break;
 		}
 		nuevoEmpleado= employee_newParametros(*(buffer),*(buffer+1),*(buffer+2),*(buffer+3));
-		ll_add(*(pArrayListEmployee+contador), nuevoEmpleado);
+		ll_add((pArrayListEmployee+contador), nuevoEmpleado);
 		contador++;
 
 	}

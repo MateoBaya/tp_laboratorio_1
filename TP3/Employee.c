@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "Employee.h"
 Employee* employee_new()
 {
@@ -25,7 +27,7 @@ Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajad
 				employee_setId(nuevoEmpleado,atoi(idStr))
 				&& employee_setNombre(nuevoEmpleado,nombreStr)
 				&& employee_setHorasTrabajadas(nuevoEmpleado,atoi(horasTrabajadasStr))
-				&& employee_setSueldo(nuevoEmpleado,taoi(sueldoStr))
+				&& employee_setSueldo(nuevoEmpleado,atoi(sueldoStr))
 		))
 		{
 			free(nuevoEmpleado);
@@ -53,7 +55,7 @@ int employee_getId(Employee* this,int* id)
 	int funcionar=0;
 	if(this!=NULL && id!=NULL)
 	{
-		id=this->id;
+		*id=this->id;
 		funcionar=1;
 	}
 	return funcionar;
@@ -77,7 +79,7 @@ int employee_getNombre(Employee* this,char* nombre)
 	int funcionar=0;
 	if(this!=NULL && nombre!=NULL)
 	{
-		nombre=this->nombre;
+    	strcpy(nombre,this->nombre);
 		funcionar=1;
 	}
 	return funcionar;
@@ -99,7 +101,7 @@ int employee_getHorasTrabajadas(Employee* this,int* horasTrabajadas)
 	int funcionar=0;
 	if(this!=NULL && horasTrabajadas!=NULL)
 	{
-		horasTrabajadas=this->horasTrabajadas;
+		*horasTrabajadas=this->horasTrabajadas;
 		funcionar=1;
 	}
 	return funcionar;
@@ -121,7 +123,7 @@ int employee_getSueldo(Employee* this,int* sueldo)
 	int funcionar=0;
 	if(this!=NULL && sueldo!=NULL)
 	{
-		sueldo=this->sueldo;
+		*sueldo=this->sueldo;
 		funcionar=1;
 	}
 	return funcionar;

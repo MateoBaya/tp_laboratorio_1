@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "LinkedList.h"
 #include "Employee.h"
+#include "utn_general.h"
 #include "parser.h"
 
 /** \brief Carga los datos de los empleados desde el archivo data.csv (modo texto).
@@ -15,24 +17,27 @@ int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
 {
 	FILE * archivo;
 	FILE * archivoNuevo;
-	archivo=fopen(path,"r");
-	if(archivo==NULL)
-	{
-		printf("No se pudo abrir el archivo");
-	}else
-	{
-		archivoNuevo=fopen("./dataT.csv","w");
-		if(archivoNuevo==NULL)
+		if(pArrayListEmployee != NULL && path != NULL)
 		{
-			printf("No se pudo abrir el archivo en modo escritura");
-		}else
-		{
-			parser_EmployeeFromText(archivo, pArrayListEmployee);
-		}
-	}
+			archivo=fopen(path,"r");
+			if(archivo==NULL)
+			{
+				printf("No se pudo abrir el archivo");
+			}else
+			{
+				archivoNuevo=fopen("./dataT.csv","w");
+				if(archivoNuevo==NULL)
+				{
+					printf("No se pudo abrir el archivo en modo escritura");
+				}else
+				{
+					parser_EmployeeFromText(archivo, pArrayListEmployee);
+				}
+			}
 
-	fclose(archivo);
-	fclose(archivoNuevo);
+			fclose(archivo);
+			fclose(archivoNuevo);
+	}
     return 1;
 }
 
@@ -47,24 +52,26 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
 {
 	FILE * archivo;
 	FILE * archivoNuevo;
-	archivo=fopen(path,"rb");
-	if(archivo==NULL)
+	if(pArrayListEmployee != NULL && path != NULL)
 	{
-		printf("No se pudo abrir el archivo");
-	}else
-	{
-		archivoNuevo=fopen("./dataB.bin","wb");
-		if(archivoNuevo==NULL)
+		archivo=fopen(path,"rb");
+		if(archivo==NULL)
 		{
-			printf("No se pudo abrir el archivo en modo escritura");
+			printf("No se pudo abrir el archivo");
 		}else
 		{
-			parser_EmployeeFromBinary(archivo, pArrayListEmployee);
+			archivoNuevo=fopen("./dataB.bin","wb");
+			if(archivoNuevo==NULL)
+			{
+				printf("No se pudo abrir el archivo en modo escritura");
+			}else
+			{
+				parser_EmployeeFromBinary(archivo, pArrayListEmployee);
+			}
 		}
-	}
-
 	fclose(archivo);
 	fclose(archivoNuevo);
+	}
     return 1;
 }
 
@@ -79,27 +86,49 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
 {
 	int funcionar=0;
 	int auxInt;
-	char auxTexto;
+	char * auxTexto;
+	int acumId=-1;
+	int len;
 	Employee empleadoAuxiliar;
+	Employee * punteroAuxiliar;
+	if(pArrayListEmployee != NULL)
+	{
 
-	printf("Cargue id: ");
-	cargarNumero(&auxInt);
-	employee_setId(empleadoAuxiliar, auxInt);
+		if(ll_isEmpty(pArrayListEmployee))
+		{
+			acumId=0;
+		}else
+		{
+			len=ll_len(pArrayListEmployee);
+			for(int i=0;i<len;i++)
+			{
+				punteroAuxiliar=(Employee*)ll_get(pArrayListEmployee, i);
+				employee_getId(punteroAuxiliar, &auxInt);
+				if(auxInt>acumId)
+				{
+					acumId=auxInt;
+				}
+			}
+		}
 
-	printf("Cargue nombre: ");
-	cargarTexto(&auxTexto);
-	employee_setNombre(empleadoAuxiliar, auxTexto);
+		employee_setId(&empleadoAuxiliar, acumId);
 
-	printf("Cargue horas trabajadas: ");
-	cargarNumero(&auxInt);
-	employee_setHorasTrabajadas(empleadoAuxiliar, auxInt);
+		printf("Cargue nombre: ");
+		cargarTexto(auxTexto);
+		employee_setNombre(&empleadoAuxiliar, auxTexto);
 
-	printf("Cargue salario: ");
-	cargarNumero(&auxInt);
-	employee_setSueldo(empleadoAuxiliar, auxInt);
+		printf("Cargue horas trabajadas: ");
+		cargarNumero(&auxInt);
+		employee_setHorasTrabajadas(&empleadoAuxiliar, auxInt);
 
-	ll_add(pArrayListEmployee, empleadoAuxiliar);
+		printf("Cargue salario: ");
+		cargarNumero(&auxInt);
+		employee_setSueldo(&empleadoAuxiliar, auxInt);
 
+		ll_add(pArrayListEmployee, &empleadoAuxiliar);
+		funcionar=1;
+
+	}
     return funcionar;
 }
 
@@ -112,7 +141,41 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_editEmployee(LinkedList* pArrayListEmployee)
 {
-    return 1;
+	int funcionar=0;
+	int idACambiar;
+	int posicion;
+	char* auxTexto;
+	int auxInt;
+	int error;
+	Employee empleadoAuxiliar;
+
+	if(pArrayListEmployee != NULL)
+	{
+		printf("Ingrese Id de Empleado a cambiar:");
+		do
+		{
+			error = cargarNumero(&idACambiar);
+		}while(error);
+		posicion=ll_indexOf(pArrayListEmployee, &idACambiar);
+
+		employee_setId(&empleadoAuxiliar, idACambiar);
+
+		printf("Cargue nombre: ");
+		cargarTexto(auxTexto);
+		employee_setNombre(&empleadoAuxiliar, auxTexto);
+
+		printf("Cargue horas trabajadas: ");
+		cargarNumero(&auxInt);
+		employee_setHorasTrabajadas(&empleadoAuxiliar, auxInt);
+
+		printf("Cargue salario: ");
+		cargarNumero(&auxInt);
+		employee_setSueldo(&empleadoAuxiliar, auxInt);
+
+		ll_set(pArrayListEmployee, posicion, &empleadoAuxiliar);
+
+	}
+	return funcionar;
 }
 
 /** \brief Baja de empleado
@@ -124,6 +187,10 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_removeEmployee(LinkedList* pArrayListEmployee)
 {
+	if(pArrayListEmployee != NULL)
+	{
+
+	}
     return 1;
 }
 
@@ -136,6 +203,10 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_ListEmployee(LinkedList* pArrayListEmployee)
 {
+	if(pArrayListEmployee != NULL)
+	{
+
+	}
     return 1;
 }
 
@@ -148,6 +219,10 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_sortEmployee(LinkedList* pArrayListEmployee)
 {
+	if(pArrayListEmployee != NULL)
+	{
+
+	}
     return 1;
 }
 
@@ -160,6 +235,10 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
 {
+	if(pArrayListEmployee != NULL && path != NULL)
+	{
+
+	}
     return 1;
 }
 
@@ -172,6 +251,10 @@ int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
  */
 int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
 {
+	if(pArrayListEmployee != NULL && path != NULL)
+	{
+
+	}
     return 1;
 }
 

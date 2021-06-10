@@ -320,7 +320,7 @@ int validarMAIL(const char * array,int len)
 
 int cargarCaracter(char * respuestaUsuario)
 {
-	int error;
+	int error=1;
 	char caracter[MAXCHAR];
 	int i;
 	fflush(stdin);
@@ -339,7 +339,7 @@ int cargarCaracter(char * respuestaUsuario)
 
 int cargarNumero(int * numeroFinal)
 {
-int error;
+int error=1;
 char numero[MAXCHAR];
 
 	fflush(stdin);
@@ -380,7 +380,7 @@ int cargarTexto(char texto[])
 
 int cargarFloat(float * numeroFinal)
 {
-	int error;
+	int error=1;
 	char numero[MAXCHAR];
 
 		fflush(stdin);
