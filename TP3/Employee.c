@@ -79,7 +79,7 @@ int employee_getNombre(Employee* this,char* nombre)
 	int funcionar=0;
 	if(this!=NULL && nombre!=NULL)
 	{
-    	strcpy(nombre,this->nombre);
+		strcpy(nombre,this->nombre);
 		funcionar=1;
 	}
 	return funcionar;

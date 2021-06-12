@@ -29,7 +29,7 @@ int main()
 
     LinkedList* listaEmpleados = ll_newLinkedList();
     do{
-    	printf("\n///////////////////////////////////////////////////////////////////////////////////////////\n");
+		printf("\n///////////////////////////////////////////////////////////////////////////////////////////\n");
 		printf("///                                                                                     ///\n");
 		printf("///    [1]-CARGAR LOS DATOS DE LOS EMPLEADOS DESDE EL ARCHIVO DATA.CSV (MODO TEXTO)     ///\n");
 		printf("///    [2]-CARGAR LOS DATOS DE LOS EMPLEADOS DESDE EL ARCHIVO DATA.CSV (MODO BINARIO)   ///\n");
@@ -43,7 +43,6 @@ int main()
 		printf("///   [10]-SALIR                                                                        ///\n");
 		printf("///                                                                                     ///\n");
 		printf("///////////////////////////////////////////////////////////////////////////////////////////\n");
-
 		do
 		{
 			cargarNumero(&option);
@@ -58,10 +57,10 @@ int main()
         switch(option)
         {
             case 1:
-                controller_loadFromText("data.csv",listaEmpleados);
+                controller_loadFromText("./data.csv",listaEmpleados);
                 break;
             case 2:
-            	controller_loadFromBinary("data.bin", listaEmpleados);
+            	controller_loadFromBinary("./dataB.bin", listaEmpleados);
             	break;
             case 3:
             	controller_addEmployee(listaEmpleados);
@@ -79,13 +78,14 @@ int main()
             	controller_sortEmployee(listaEmpleados);
             	break;
             case 8:
-            	controller_saveAsText("dataT.csv", listaEmpleados);
+            	controller_saveAsText("./data.csv", listaEmpleados);
             	break;
             case 9:
-            	controller_saveAsBinary("dataB.bin", listaEmpleados);
+            	controller_saveAsBinary("./dataB.bin", listaEmpleados);
             	break;
         }
     }while(option != 10);
+    ll_deleteLinkedList(listaEmpleados);
     return 0;
 }
 
