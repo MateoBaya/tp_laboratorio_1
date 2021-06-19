@@ -11,25 +11,25 @@ int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
 {
 	int funcionar=0;
 	FILE * archivo;
-		if(pArrayListEmployee != NULL && path != NULL)
+	if(pArrayListEmployee != NULL && path != NULL)
+	{
+		if(!ll_isEmpty(pArrayListEmployee))
 		{
-			if(!ll_isEmpty(pArrayListEmployee))
-			{
-				printf("Ya tenia datos, se copiaron a un archivo auxiliar\n");
-				controller_saveAsText("./dataAux.csv", pArrayListEmployee);
-			}
+			printf("Ya tenia datos, se copiaron a un archivo auxiliar\n");
+			controller_saveAsText("./dataAux.csv", pArrayListEmployee);
 			ll_clear(pArrayListEmployee);
-			archivo=fopen(path,"r");
-			if(archivo==NULL)
-			{
-				printf("No se pudo abrir el archivo\n");
-			}else
-			{
-				parser_EmployeeFromText(archivo, pArrayListEmployee);
-				funcionar=1;
-			}
+		}
+		archivo=fopen(path,"r");
+		if(archivo==NULL)
+		{
+			printf("No se pudo abrir el archivo\n");
+		}else
+		{
+			parser_EmployeeFromText(archivo, pArrayListEmployee);
+			funcionar=1;
+		}
 
-			fclose(archivo);
+		fclose(archivo);
 	}
     return funcionar;
 }
@@ -51,6 +51,7 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
 		{
 			printf("Ya tenia datos, se copiaron a un archivo auxiliar\n");
 			controller_saveAsText("./dataAux.csv", pArrayListEmployee);
+			ll_clear(pArrayListEmployee);
 		}
 		archivo=fopen(path,"rb");
 		if(archivo==NULL)
