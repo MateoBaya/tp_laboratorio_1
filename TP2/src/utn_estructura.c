@@ -443,6 +443,7 @@ int ordenarPorApellidoSector(eTrabajadores varGeneral[],int len,int orden)
 						strcpy(auxArrayTexto,varGeneral[i].apellido);
 						strcpy(varGeneral[i].apellido,varGeneral[j].apellido);
 						strcpy(varGeneral[j].apellido,auxArrayTexto);
+						funcionar=1;
 					}
 					else if(!varGeneral[i].isEmpty&&!varGeneral[j].isEmpty&&varGeneral[i].sector==varGeneral[j].sector&&strcmp(varGeneral[i].apellido,varGeneral[j].apellido)>0)
 					{
@@ -465,6 +466,7 @@ int ordenarPorApellidoSector(eTrabajadores varGeneral[],int len,int orden)
 						strcpy(auxArrayTexto,varGeneral[i].apellido);
 						strcpy(varGeneral[i].apellido,varGeneral[j].apellido);
 						strcpy(varGeneral[j].apellido,auxArrayTexto);
+						funcionar=1;
 					}
 				}
 			}
@@ -496,6 +498,7 @@ int ordenarPorApellidoSector(eTrabajadores varGeneral[],int len,int orden)
 						strcpy(auxArrayTexto,varGeneral[i].apellido);
 						strcpy(varGeneral[i].apellido,varGeneral[j].apellido);
 						strcpy(varGeneral[j].apellido,auxArrayTexto);
+						funcionar=1;
 					}
 					else if(!varGeneral[i].isEmpty&&!varGeneral[j].isEmpty&&varGeneral[i].sector==varGeneral[j].sector&&strcmp(varGeneral[i].apellido,varGeneral[j].apellido)<0)
 					{
@@ -518,6 +521,7 @@ int ordenarPorApellidoSector(eTrabajadores varGeneral[],int len,int orden)
 						strcpy(auxArrayTexto,varGeneral[i].apellido);
 						strcpy(varGeneral[i].apellido,varGeneral[j].apellido);
 						strcpy(varGeneral[j].apellido,auxArrayTexto);
+						funcionar=1;
 					}
 				}
 			}
