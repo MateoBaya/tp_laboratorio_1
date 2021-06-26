@@ -45,7 +45,7 @@ int mayor18Menor100(int val1)
 int valorConRango(int val1,int min,int max)
 {
 	int funcionar=0;
-	if(val1<max && val1>min)
+	if(val1<=max && val1>=min)
 	{
 		funcionar=1;
 	}
@@ -245,8 +245,6 @@ int validarCUIT(char array[],int len)
 	int flagPrimerGuion=1;
 	int flagSegundoGuion=1;
 
-	printf("%d",acumFuncionando);
-
 
 	for(int i=0;i<len;i++)
 	{
@@ -268,7 +266,6 @@ int validarCUIT(char array[],int len)
 			break;
 		}
 	}
-	printf("%d",acumFuncionando);
 
 	if(acumFuncionando==13)
 	{
@@ -323,7 +320,7 @@ int validarMAIL(const char * array,int len)
 
 int cargarCaracter(char * respuestaUsuario)
 {
-	int error;
+	int error=1;
 	char caracter[MAXCHAR];
 	int i;
 	fflush(stdin);
@@ -342,7 +339,7 @@ int cargarCaracter(char * respuestaUsuario)
 
 int cargarNumero(int * numeroFinal)
 {
-int error;
+int error=1;
 char numero[MAXCHAR];
 
 	fflush(stdin);
@@ -364,19 +361,26 @@ int cargarTexto(char texto[])
 {
 	int funcionar=0;
 	char auxtexto[MAXCHAR];
-	fflush(stdin);
-	scanf("%s",auxtexto);
-	if (textoDeUsuarioLargoCorrecto(auxtexto, MAXCHAR))
+	if(texto != NULL)
 	{
-	strcpy(texto,auxtexto);
-	funcionar=1;
+		fflush(stdin);
+		fgets(auxtexto,MAXCHAR,stdin);
+		if(auxtexto[strlen(auxtexto)-1]=='\n')
+		{
+			auxtexto[strlen(auxtexto)-1]='\0';
+		}
+		if (textoDeUsuarioLargoCorrecto(auxtexto, MAXCHAR))
+		{
+		strcpy(texto,auxtexto);
+		funcionar=1;
+		}
 	}
 	return funcionar;
 }
 
 int cargarFloat(float * numeroFinal)
 {
-	int error;
+	int error=1;
 	char numero[MAXCHAR];
 
 		fflush(stdin);
@@ -396,9 +400,12 @@ int cargarFloat(float * numeroFinal)
 
 void inicioEntero(int array[], int len)
 {
-	for(int i=0;i<len;i++)
+	if(array != NULL)
 	{
-		array[i] = 0;
+		for(int i=0;i<len;i++)
+		{
+			array[i] = 0;
+		}
 	}
 }
 
@@ -432,5 +439,14 @@ void inicioCharMatriz(char array[][MAXCHAR], int len)
 		{
 			strcpy(array[i],"");
 		}
+	}
+}
+
+void primerLetraMayuscula(char array[])
+{
+	if(array != NULL)
+	{
+		strlwr(array);
+		array[0]=toupper(array[0]);
 	}
 }

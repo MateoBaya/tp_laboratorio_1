@@ -123,5 +123,6 @@ void inicioCharMatriz(char array[][MAXCHAR], int len);
  * param len es la cantidad de posiciones de la matriz en un eje, el mismo
  */
 
+void primerLetraMayuscula(char array[]);
 
 #endif /* UTN_GENERAL_H_ */

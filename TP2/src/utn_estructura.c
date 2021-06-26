@@ -212,7 +212,7 @@ int ABMinformes(eTrabajadores varGeneral[],int len)
 {
 	int funcionar=0;
 	int decidir;
-
+	int error;
 	do
 	{
 	printf("[1]-Ordenamiento por Apellido y Sector, [2]-Mostrar promedio salario y trabajadores con mayor salario a promedio, [3]-Salir: ");
@@ -220,7 +220,12 @@ int ABMinformes(eTrabajadores varGeneral[],int len)
 	switch(decidir)
 		{
 		case 1:
-			ordenarPorApellidoSector(varGeneral, len);
+			do
+			{
+				printf("Tipo de orden [1]-Ascendente [0]-Descendente: ");
+				error=cargarNumero(&decidir);
+			}while(error);
+			ordenarPorApellidoSector(varGeneral,len,decidir);
 			ABMLectura(varGeneral, len);
 			break;
 		case 2:
@@ -403,63 +408,119 @@ int promediar(eTrabajadores varGeneral[],int len)
 ///////////////////////////////////////ORDENAMIENTOS////////////////////////////////////////////////////
 
 
-int ordenarPorApellidoSector(eTrabajadores varGeneral[],int len)
+int ordenarPorApellidoSector(eTrabajadores varGeneral[],int len,int orden)
 {
 	int funcionar=0;
-	int flagNoOrdenado=1;
 	int aux;
 	float auxFloat;
-	int i;
 	char auxArrayTexto[MAXCHAR];
 	if(varGeneral != NULL)
 	{
-		while(flagNoOrdenado)
+		if(orden)
 		{
-			flagNoOrdenado=0;
-			for(i=1;i<len;i++)
+			for(int i=0;i<len-1;i++)
 			{
-					if(varGeneral[i].sector < varGeneral[i-1].sector)
+				for(int j=i+1;j<len;j++)
+				{
+					if(!varGeneral[i].isEmpty&&!varGeneral[j].isEmpty&&varGeneral[i].sector>varGeneral[j].sector)
 					{
 						aux=varGeneral[i].idTrabajador;
-						varGeneral[i].idTrabajador=varGeneral[i-1].idTrabajador;
-						varGeneral[i-1].idTrabajador=aux;
+						varGeneral[i].idTrabajador=varGeneral[j].idTrabajador;
+						varGeneral[j].idTrabajador=aux;
 
-						strcpy(auxArrayTexto,varGeneral[i].nombre);
-						strcpy(varGeneral[i].nombre,varGeneral[i-1].nombre);
-						strcpy(varGeneral[i-1].nombre,auxArrayTexto);
-
-						strcpy(auxArrayTexto,varGeneral[i].apellido);
-						strcpy(varGeneral[i].apellido,varGeneral[i-1].apellido);
-						strcpy(varGeneral[i-1].apellido,auxArrayTexto);
+						aux=varGeneral[i].sector;
+						varGeneral[i].sector=varGeneral[j].sector;
+						varGeneral[j].sector=aux;
 
 						auxFloat=varGeneral[i].salario;
-						varGeneral[i].salario=varGeneral[i-1].salario;
-						varGeneral[i-1].salario=auxFloat;
-						flagNoOrdenado=1;
-
-					}else if(varGeneral[i].sector == varGeneral[i-1].sector && strcmp(varGeneral[i].apellido,varGeneral[i-1].apellido) < 0)
-					{
-						aux=varGeneral[i].idTrabajador;
-						varGeneral[i].idTrabajador=varGeneral[i-1].idTrabajador;
-						varGeneral[i-1].idTrabajador=aux;
+						varGeneral[i].salario=varGeneral[j].salario;
+						varGeneral[j].salario=auxFloat;
 
 						strcpy(auxArrayTexto,varGeneral[i].nombre);
-						strcpy(varGeneral[i].nombre,varGeneral[i-1].nombre);
-						strcpy(varGeneral[i-1].nombre,auxArrayTexto);
+						strcpy(varGeneral[i].nombre,varGeneral[j].nombre);
+						strcpy(varGeneral[j].nombre,auxArrayTexto);
 
 						strcpy(auxArrayTexto,varGeneral[i].apellido);
-						strcpy(varGeneral[i].apellido,varGeneral[i-1].apellido);
-						strcpy(varGeneral[i-1].apellido,auxArrayTexto);
-
-						auxFloat=varGeneral[i].salario;
-						varGeneral[i].salario=varGeneral[i-1].salario;
-						varGeneral[i-1].salario=auxFloat;
-						flagNoOrdenado=1;
-
+						strcpy(varGeneral[i].apellido,varGeneral[j].apellido);
+						strcpy(varGeneral[j].apellido,auxArrayTexto);
 					}
+					else if(!varGeneral[i].isEmpty&&!varGeneral[j].isEmpty&&varGeneral[i].sector==varGeneral[j].sector&&strcmp(varGeneral[i].apellido,varGeneral[j].apellido)>0)
+					{
+						aux=varGeneral[i].idTrabajador;
+						varGeneral[i].idTrabajador=varGeneral[j].idTrabajador;
+						varGeneral[j].idTrabajador=aux;
 
+						aux=varGeneral[i].sector;
+						varGeneral[i].sector=varGeneral[j].sector;
+						varGeneral[j].sector=aux;
+
+						auxFloat=varGeneral[i].salario;
+						varGeneral[i].salario=varGeneral[j].salario;
+						varGeneral[j].salario=auxFloat;
+
+						strcpy(auxArrayTexto,varGeneral[i].nombre);
+						strcpy(varGeneral[i].nombre,varGeneral[j].nombre);
+						strcpy(varGeneral[j].nombre,auxArrayTexto);
+
+						strcpy(auxArrayTexto,varGeneral[i].apellido);
+						strcpy(varGeneral[i].apellido,varGeneral[j].apellido);
+						strcpy(varGeneral[j].apellido,auxArrayTexto);
+					}
+				}
 			}
-		funcionar=1;
+		}
+		else
+		{
+			for(int i=0;i<len-1;i++)
+			{
+				for(int j=i+1;j<len;j++)
+				{
+					if(!varGeneral[i].isEmpty&&!varGeneral[j].isEmpty&&varGeneral[i].sector<varGeneral[j].sector)
+					{
+						aux=varGeneral[i].idTrabajador;
+						varGeneral[i].idTrabajador=varGeneral[j].idTrabajador;
+						varGeneral[j].idTrabajador=aux;
+
+						aux=varGeneral[i].sector;
+						varGeneral[i].sector=varGeneral[j].sector;
+						varGeneral[j].sector=aux;
+
+						auxFloat=varGeneral[i].salario;
+						varGeneral[i].salario=varGeneral[j].salario;
+						varGeneral[j].salario=auxFloat;
+
+						strcpy(auxArrayTexto,varGeneral[i].nombre);
+						strcpy(varGeneral[i].nombre,varGeneral[j].nombre);
+						strcpy(varGeneral[j].nombre,auxArrayTexto);
+
+						strcpy(auxArrayTexto,varGeneral[i].apellido);
+						strcpy(varGeneral[i].apellido,varGeneral[j].apellido);
+						strcpy(varGeneral[j].apellido,auxArrayTexto);
+					}
+					else if(!varGeneral[i].isEmpty&&!varGeneral[j].isEmpty&&varGeneral[i].sector==varGeneral[j].sector&&strcmp(varGeneral[i].apellido,varGeneral[j].apellido)<0)
+					{
+						aux=varGeneral[i].idTrabajador;
+						varGeneral[i].idTrabajador=varGeneral[j].idTrabajador;
+						varGeneral[j].idTrabajador=aux;
+
+						aux=varGeneral[i].sector;
+						varGeneral[i].sector=varGeneral[j].sector;
+						varGeneral[j].sector=aux;
+
+						auxFloat=varGeneral[i].salario;
+						varGeneral[i].salario=varGeneral[j].salario;
+						varGeneral[j].salario=auxFloat;
+
+						strcpy(auxArrayTexto,varGeneral[i].nombre);
+						strcpy(varGeneral[i].nombre,varGeneral[j].nombre);
+						strcpy(varGeneral[j].nombre,auxArrayTexto);
+
+						strcpy(auxArrayTexto,varGeneral[i].apellido);
+						strcpy(varGeneral[i].apellido,varGeneral[j].apellido);
+						strcpy(varGeneral[j].apellido,auxArrayTexto);
+					}
+				}
+			}
 		}
 	}
 	return funcionar;

@@ -52,6 +52,6 @@ int promediar(eTrabajadores varGeneral[],int len);
 
 ///////////////////////////////////////ORDENAMIENTOS////////////////////////////////////////////////////
 
-int ordenarPorApellidoSector(eTrabajadores varGeneral[],int len);
+int ordenarPorApellidoSector(eTrabajadores varGeneral[],int len,int orden);
 
 #endif /* UTN_ESTRUCTURA_H_ */
