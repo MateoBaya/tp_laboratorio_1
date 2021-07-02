@@ -422,7 +422,7 @@ int ordenarPorApellidoSector(eTrabajadores varGeneral[],int len,int orden)
 			{
 				for(int j=i+1;j<len;j++)
 				{
-					if(!varGeneral[i].isEmpty&&!varGeneral[j].isEmpty&&varGeneral[i].sector>varGeneral[j].sector)
+					if(!varGeneral[i].isEmpty&&!varGeneral[j].isEmpty&&strcmp(varGeneral[i].apellido,varGeneral[j].apellido)>0)
 					{
 						aux=varGeneral[i].idTrabajador;
 						varGeneral[i].idTrabajador=varGeneral[j].idTrabajador;
@@ -445,7 +445,7 @@ int ordenarPorApellidoSector(eTrabajadores varGeneral[],int len,int orden)
 						strcpy(varGeneral[j].apellido,auxArrayTexto);
 						funcionar=1;
 					}
-					else if(!varGeneral[i].isEmpty&&!varGeneral[j].isEmpty&&varGeneral[i].sector==varGeneral[j].sector&&strcmp(varGeneral[i].apellido,varGeneral[j].apellido)>0)
+					else if(!varGeneral[i].isEmpty&&!varGeneral[j].isEmpty&&!strcmp(varGeneral[i].apellido,varGeneral[j].apellido)&&varGeneral[i].sector>varGeneral[j].sector)
 					{
 						aux=varGeneral[i].idTrabajador;
 						varGeneral[i].idTrabajador=varGeneral[j].idTrabajador;
@@ -477,7 +477,7 @@ int ordenarPorApellidoSector(eTrabajadores varGeneral[],int len,int orden)
 			{
 				for(int j=i+1;j<len;j++)
 				{
-					if(!varGeneral[i].isEmpty&&!varGeneral[j].isEmpty&&varGeneral[i].sector<varGeneral[j].sector)
+					if(!varGeneral[i].isEmpty&&!varGeneral[j].isEmpty&&strcmp(varGeneral[i].apellido,varGeneral[j].apellido)<0)
 					{
 						aux=varGeneral[i].idTrabajador;
 						varGeneral[i].idTrabajador=varGeneral[j].idTrabajador;
@@ -500,7 +500,7 @@ int ordenarPorApellidoSector(eTrabajadores varGeneral[],int len,int orden)
 						strcpy(varGeneral[j].apellido,auxArrayTexto);
 						funcionar=1;
 					}
-					else if(!varGeneral[i].isEmpty&&!varGeneral[j].isEmpty&&varGeneral[i].sector==varGeneral[j].sector&&strcmp(varGeneral[i].apellido,varGeneral[j].apellido)<0)
+					else if(!varGeneral[i].isEmpty&&!varGeneral[j].isEmpty&&!strcmp(varGeneral[i].apellido,varGeneral[j].apellido)&&varGeneral[i].sector<varGeneral[j].sector)
 					{
 						aux=varGeneral[i].idTrabajador;
 						varGeneral[i].idTrabajador=varGeneral[j].idTrabajador;
