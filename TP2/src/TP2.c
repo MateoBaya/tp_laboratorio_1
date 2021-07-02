@@ -8,8 +8,6 @@ int main(void)
 	setbuf(stdout,NULL);
 	eTrabajadores varTrabajadores[MAXTRABAJADORES];
 	inicializarisEmpty(varTrabajadores, MAXTRABAJADORES);
-
 	menuTrabajadores(varTrabajadores, MAXTRABAJADORES, "Trabajadores");
-
 	return 0;
 }
