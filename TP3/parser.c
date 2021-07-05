@@ -53,12 +53,8 @@ int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
 	int funcionar=0;
 	Employee nuevoEmpleado;
 	Employee*punteroEmpleado;
-	char*id=(char*)malloc(sizeof(char)*128);
-	char*sueldo=(char*)malloc(sizeof(char)*128);
-	char*horasTrabajadas=(char*)malloc(sizeof(char)*128);
-	char*nombre=(char*)malloc(sizeof(char)*128);
 	int validarCant;
-	if(pFile!=NULL&&pArrayListEmployee!=NULL&&id!=NULL&&sueldo!=NULL&&horasTrabajadas!=NULL&&nombre!=NULL)
+	if(pFile!=NULL&&pArrayListEmployee!=NULL)
 	{
 		while(!(feof(pFile)))
 		{
@@ -66,14 +62,22 @@ int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
 			if(validarCant==1)
 			{
 				punteroEmpleado=employee_new();
-				employee_setId(punteroEmpleado, nuevoEmpleado.id);
-				employee_setSueldo(punteroEmpleado, nuevoEmpleado.sueldo);
-				employee_setHorasTrabajadas(punteroEmpleado, nuevoEmpleado.horasTrabajadas);
-				employee_setNombre(punteroEmpleado, nuevoEmpleado.nombre);
+				if(punteroEmpleado!=NULL)
+				{
+					employee_setId(punteroEmpleado, nuevoEmpleado.id);
+					employee_setSueldo(punteroEmpleado, nuevoEmpleado.sueldo);
+					employee_setHorasTrabajadas(punteroEmpleado, nuevoEmpleado.horasTrabajadas);
+					employee_setNombre(punteroEmpleado, nuevoEmpleado.nombre);
 
-				ll_add(pArrayListEmployee, punteroEmpleado);
+					ll_add(pArrayListEmployee, punteroEmpleado);
+					funcionar=1;
+				}
+				else
+				{
+					funcionar=0;
+					break;
+				}
 			}
-			funcionar=1;
 		}
 	}
     return funcionar;

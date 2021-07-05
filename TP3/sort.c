@@ -10,7 +10,7 @@ int compararSalario(void* persona1,void* persona2)
 		{
 			funcionar=1;
 		}
-		if(((Employee*)persona1)->sueldo<((Employee*)persona2)->sueldo)
+		else if(((Employee*)persona1)->sueldo<((Employee*)persona2)->sueldo)
 		{
 			funcionar=-1;
 		}
@@ -28,7 +28,7 @@ int compararId(void* persona1,void* persona2)
 		{
 			funcionar=1;
 		}
-		if(((Employee*)persona1)->id<((Employee*)persona2)->id)
+		else if(((Employee*)persona1)->id<((Employee*)persona2)->id)
 		{
 			funcionar=-1;
 		}
@@ -46,7 +46,7 @@ int compararHorasTrabajadas(void* persona1,void* persona2)
 		{
 			funcionar=1;
 		}
-		if(((Employee*)persona1)->horasTrabajadas<((Employee*)persona2)->horasTrabajadas)
+		else if(((Employee*)persona1)->horasTrabajadas<((Employee*)persona2)->horasTrabajadas)
 		{
 			funcionar=-1;
 		}
@@ -68,7 +68,7 @@ int compararNombres(void* persona1,void* persona2)
 		{
 			funcionar=1;
 		}
-		if(strcmp(nombre1,nombre2)<0)
+		else if(strcmp(nombre1,nombre2)<0)
 		{
 			funcionar=-1;
 		}

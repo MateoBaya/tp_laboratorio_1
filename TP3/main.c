@@ -38,7 +38,7 @@ int main()
 		printf("///    [5]-BAJA DE EMPLEADO                                                             ///\n");
 		printf("///    [6]-LISTAR EMPLEADOS                                                             ///\n");
 		printf("///    [7]-ORDENAR EMPLEADOS                                                            ///\n");
-		printf("///    [8]-GUARDAR LOS DATOS DE LOS EMPLEADOS EN EL ARCHIVO DATAT.CSV (MODO TEXTO)      ///\n");
+		printf("///    [8]-GUARDAR LOS DATOS DE LOS EMPLEADOS EN EL ARCHIVO DATA.CSV (MODO TEXTO)       ///\n");
 		printf("///    [9]-GUARDAR LOS DATOS DE LOS EMPLEADOS EN EL ARCHIVO DATAB.BIN (MODO BINARIO)    ///\n");
 		printf("///   [10]-SALIR                                                                        ///\n");
 		printf("///                                                                                     ///\n");

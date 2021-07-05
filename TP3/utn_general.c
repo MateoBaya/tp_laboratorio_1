@@ -136,32 +136,37 @@ int validarNumeros(char numero[], int len)
 int validarChar(char caracter[], int len,int cantCaracteres,int * i)
 {
 	int funcionar=0;
-		int auxAcum=0;
+	int auxAcum=0;
 
-		if(caracter != NULL)
+	if(caracter != NULL&&len>0)
+	{
+		for(*i=0; *i<len; (*i)++)
 		{
-			for(*i=0; *i<len; i++)
-					{
-						if(isalpha(caracter[*i]))
-						{
-							auxAcum++;
-							if(auxAcum==cantCaracteres)
-							{
-							break;
-							}
-						}else
-						{
-							break;
-						}
-					}
-
-
-			if(strlen(caracter)==auxAcum)
+			if(caracter[0]=='\n'||caracter[0]=='\0')
 			{
-				funcionar=1;
+				auxAcum=-1;
+				break;
+			}
+			if(!isdigit(caracter[*i]))
+			{
+				auxAcum++;
+				if(auxAcum==cantCaracteres)
+				{
+				break;
+				}
+			}else
+			{
+				break;
 			}
 		}
-		return funcionar;
+
+
+		if(strlen(caracter)==auxAcum)
+		{
+			funcionar=1;
+		}
+	}
+	return funcionar;
 }
 
 int validarFloat(char numero[], int len)
@@ -357,7 +362,7 @@ char numero[MAXCHAR];
 return error;
 }
 
-int cargarTexto(char texto[])
+int cargarTexto(char * texto)
 {
 	int funcionar=0;
 	char auxtexto[MAXCHAR];
@@ -373,6 +378,24 @@ int cargarTexto(char texto[])
 		{
 		strcpy(texto,auxtexto);
 		funcionar=1;
+		}
+	}
+	return funcionar;
+}
+
+int cargarNombre(char*texto)
+{
+	int funcionar=-1;
+	int i;
+	if(texto!=NULL)
+	{
+		if(cargarTexto(texto)&&validarChar(texto, MAXCHAR, strlen(texto), &i))
+		{
+			funcionar=0;
+		}
+		else
+		{
+			funcionar=i+1;
 		}
 	}
 	return funcionar;

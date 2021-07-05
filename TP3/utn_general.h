@@ -91,7 +91,9 @@ int cargarNumero(int * numeroFinal);
  * @return el valor es 0 si no ocurrio ningun error (si el valor es un numero decimal)
  */
 
-int cargarTexto(char texto[]);
+int cargarTexto(char * texto);
+
+int cargarNombre(char * texto);
 
 int cargarFloat(float * numeroFinal);
 
